@@ -1,0 +1,21 @@
+.flexFluid {
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+.flexCol {
+  display: flex;
+  flex-flow: column wrap;
+  min-height: 0;
+
+}
+
+.background {
+  background-color: aquamarine;
+}
+
+.flexHeader {
+  flex-direction: column;
+  flex: 1;
+}

@@ -1,0 +1,13 @@
+node_modules
+*.iml
+*.ipr
+.idea*
+node
+yarn-error.log
+/dist
+/.externalToolBuilders
+
+# macOS
+.DS_Store
+.yalc
+yalc.lock

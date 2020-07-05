@@ -1,0 +1,9 @@
+.nav {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+
+  &.reversed {
+    color: var(--color-light);
+  }
+}
