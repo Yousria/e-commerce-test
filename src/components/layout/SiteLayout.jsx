@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styles from './SiteLayout.scss';
 import PaginationSelector from '../PaginationSelector';
 import PageSelector from '../PageSelector';
+import Header from './Header';
 
 export const SiteLayout = ({ navigation, content, component }) => (
   <>
@@ -11,7 +12,7 @@ export const SiteLayout = ({ navigation, content, component }) => (
       {navigation}
     </div>
     <div className={classnames(styles.flexHeader)}>
-      <div className={classnames(styles.flexFluid)}>header</div>
+      <div className={classnames(styles.header)}><Header/></div>
       {
                 React.createElement(
                   component,

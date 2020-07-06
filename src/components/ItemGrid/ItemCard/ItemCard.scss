@@ -10,3 +10,17 @@
 .typo {
   font-size: 0.8rem !important;
 }
+
+.flexbox {
+  display: flex;
+  flex-direction: column;
+}
+
+.cardContent {
+  flex: 1;
+  flex-basis: 60px;
+}
+
+.cardActions {
+  flex-direction: row-reverse;
+}
