@@ -12,10 +12,15 @@
 }
 
 .background {
-  background-color: aquamarine;
+  width: 200px;
 }
 
 .flexHeader {
   flex-direction: column;
   flex: 1;
+}
+
+.footer {
+  display: flex;
+  flex-flow: row-reverse;
 }

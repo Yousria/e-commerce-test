@@ -1,14 +1,21 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import SiteLayout from './layout';
 import Navigation from './layout/Navigation';
-
+import ItemGrid from './ItemGrid/ItemGrid';
 
 export const App = () => {
-    return (
-        <SiteLayout navigation={<Navigation>Navigation</Navigation>}
-                    content={<h1>APP</h1>}
-        />
-    )
+  const { photos, status } = useSelector((state) => ({
+    photos: state.photos,
+    status: state.status
+  }));
+
+  return (
+    <SiteLayout
+      navigation={<Navigation>Navigation</Navigation>}
+      content={status === 'received' ? <ItemGrid photos={photos} /> : ''}
+    />
+  );
 };
 
 export default App;
