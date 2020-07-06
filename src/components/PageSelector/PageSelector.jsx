@@ -32,7 +32,14 @@ export const PageSelector = () => {
                 disabled={currentPage === 1}>
                 <ChevronLeft/>
             </IconButton>
-            <IconButton disabled={currentPage === 1}>
+            <IconButton disabled={currentPage === 1}
+                        onClick={() => {
+                            dispatch({
+                                type: 'SET_CURRENT_PAGE',
+                                payload: 1
+                            });
+                            dispatch(getDataAction());
+                        }}>
                 <FirstPage/>
             </IconButton>
         </React.Fragment>
