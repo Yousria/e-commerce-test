@@ -9,7 +9,7 @@
     "lint": "yarn lint:js",
     "lint:fix": "yarn lint:js:fix",
     "start": "node_modules/.bin/webpack-dev-server --mode development --open",
-    "build": "node_modules/.bin/webpack --config webpack.prod.js --mode production"
+    "build": "node_modules/.bin/webpack --config webpack.config.js --mode development"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
