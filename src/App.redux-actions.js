@@ -9,9 +9,10 @@ const PREVIOUS_PAGE = 'PREVIOUS_PAGE';
 const ADD_ITEM = 'ADD_ITEM';
 const OPEN_BASKET = 'OPEN_BASKET';
 const REMOVE_ITEM = 'REMOVE_ITEM';
+const SET_TOTAL = 'SET_TOTAL';
 
 const initialState = {
-  photos: [], basket: [], status: '', pageLimit: 15, currentPage: 1, lastPage: 0, openBasket: false
+  photos: [], basket: [], status: '', pageLimit: 15, currentPage: 1, lastPage: 0, openBasket: false, totalItems: 0
 };
 
 export const getDataAction = () => function (dispatch, getState) {
@@ -67,13 +68,31 @@ export const reducer = (state = initialState, action) => {
       state = { ...state, currentPage: action.payload};
       break;
     case ADD_ITEM:
-      state = { ...state, basket: [...state.basket, action.payload]};
+      let addedItem = state.basket.find(item => item.id === action.payload.id);
+      if (addedItem) {
+        addedItem.quantity += 1;
+        return { ...state, totalItems: state.totalItems + 1 };
+      } else {
+        action.payload.quantity = 1;
+        return { ...state, totalItems: state.totalItems + 1, basket: [...state.basket, action.payload]}
+      }
       break;
     case OPEN_BASKET:
       state = { ...state, openBasket: action.payload};
       break;
+    case SET_TOTAL:
+      state = { ...state, totalItems: action.payload};
+      break;
     case REMOVE_ITEM:
-      state = { ...state, basket: state.basket.filter(item => item.id !== action.payload)};
+      let itemToRemove = state.basket.find(item => item.id === action.payload.id);
+      if (itemToRemove) {
+        if (itemToRemove.quantity > 1) {
+          itemToRemove.quantity -= 1;
+          return { ...state, totalItems: state.totalItems - 1};
+        } else {
+          return { ...state, totalItems: state.totalItems - 1, basket: state.basket.filter(item => item.id !== action.payload.id)};
+        }
+      }
       break;
   }
 

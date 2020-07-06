@@ -6,11 +6,8 @@ import PaginationSelector from '../PaginationSelector';
 import PageSelector from '../PageSelector';
 import Header from './Header';
 
-export const SiteLayout = ({ navigation, content, component }) => (
+export const SiteLayout = ({content, component }) => (
   <>
-    <div className={classnames(styles.flexCol, styles.background)}>
-      {navigation}
-    </div>
     <div className={classnames(styles.flexHeader)}>
       <div className={classnames(styles.header)}><Header/></div>
       {
@@ -35,11 +32,6 @@ SiteLayout.defaultProps = {
 };
 
 SiteLayout.propTypes = {
-  /**
-     * Slot for the site's navigation
-     */
-  navigation: PropTypes.node,
-
   /**
      * Slot for the site's content
      */

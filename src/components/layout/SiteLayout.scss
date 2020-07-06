@@ -1,7 +1,7 @@
 .flexFluid {
   flex: 1;
   min-width: 0;
-  min-height: 0;
+  min-height: 1000px;
 }
 
 .flexCol {
@@ -18,14 +18,17 @@
 .flexHeader {
   flex-direction: column;
   flex: 1;
+  background: antiquewhite;
 }
 
 .footer {
   display: flex;
   flex-flow: row-reverse;
+  background-color: darksalmon;
 }
 
 .header {
   display: flex;
   flex-flow: row-reverse;
+  background-color: darksalmon;
 }

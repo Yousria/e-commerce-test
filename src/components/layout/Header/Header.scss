@@ -15,3 +15,17 @@
 .drawer {
   overflow: auto;
 }
+
+.cardContent {
+  flex-basis: 460px;
+}
+
+.drawerHeader {
+  background-color: darksalmon;
+  display: flex;
+  height: 55px;
+}
+
+.typo {
+  margin: auto;
+}
