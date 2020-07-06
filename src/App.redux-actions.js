@@ -78,7 +78,7 @@ export const reducer = (state = initialState, action) => {
       state = { ...state, currentPage: action.payload};
       break;
     case ADD_ITEM:
-      addItem(state, action);
+      return addItem(state, action);
       break;
     case OPEN_BASKET:
       state = { ...state, openBasket: action.payload};
@@ -87,7 +87,7 @@ export const reducer = (state = initialState, action) => {
       state = { ...state, totalItems: action.payload};
       break;
     case REMOVE_ITEM:
-      removeItem(state, action);
+      return removeItem(state, action);
       break;
     case SEARCH:
       state = { ...state, searchTerm: action.payload};
