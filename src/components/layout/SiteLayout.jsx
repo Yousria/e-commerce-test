@@ -3,6 +3,7 @@ import classnames from 'clsx';
 import PropTypes from 'prop-types';
 import styles from './SiteLayout.scss';
 import PaginationSelector from '../PaginationSelector';
+import PageSelector from '../PageSelector';
 
 export const SiteLayout = ({ navigation, content, component }) => (
   <>
@@ -19,7 +20,8 @@ export const SiteLayout = ({ navigation, content, component }) => (
                 )
       }
       <div className={styles.footer}>
-        <PaginationSelector/>
+          <PageSelector/>
+          <PaginationSelector/>
       </div>
     </div>
   </>
