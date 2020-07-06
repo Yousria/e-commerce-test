@@ -7,9 +7,11 @@ const SET_LAST_PAGE = 'SET_LAST_PAGE';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const PREVIOUS_PAGE = 'PREVIOUS_PAGE';
 const ADD_ITEM = 'ADD_ITEM';
+const OPEN_BASKET = 'OPEN_BASKET';
+const REMOVE_ITEM = 'REMOVE_ITEM';
 
 const initialState = {
-  photos: [], basket: [], status: '', pageLimit: 15, currentPage: 1, lastPage: 0
+  photos: [], basket: [], status: '', pageLimit: 15, currentPage: 1, lastPage: 0, openBasket: false
 };
 
 export const getDataAction = () => function (dispatch, getState) {
@@ -66,6 +68,12 @@ export const reducer = (state = initialState, action) => {
       break;
     case ADD_ITEM:
       state = { ...state, basket: [...state.basket, action.payload]};
+      break;
+    case OPEN_BASKET:
+      state = { ...state, openBasket: action.payload};
+      break;
+    case REMOVE_ITEM:
+      state = { ...state, basket: state.basket.filter(item => item.id !== action.payload)};
       break;
   }
 
