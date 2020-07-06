@@ -10,9 +10,18 @@ const ADD_ITEM = 'ADD_ITEM';
 const OPEN_BASKET = 'OPEN_BASKET';
 const REMOVE_ITEM = 'REMOVE_ITEM';
 const SET_TOTAL = 'SET_TOTAL';
+const SEARCH = 'SEARCH';
 
 const initialState = {
-  photos: [], basket: [], status: '', pageLimit: 15, currentPage: 1, lastPage: 0, openBasket: false, totalItems: 0
+  photos: [],
+  basket: [],
+  status: '',
+  pageLimit: 15,
+  currentPage: 1,
+  lastPage: 0,
+  openBasket: false,
+  totalItems: 0,
+  searchTerm: ''
 };
 
 export const getDataAction = () => function (dispatch, getState) {
@@ -20,7 +29,8 @@ export const getDataAction = () => function (dispatch, getState) {
     type: DATA_REQUESTED,
   });
 
-  let url = 'https://jsonplaceholder.typicode.com/photos?_page='+ getState().currentPage +'&_limit=' + getState().pageLimit;
+  let url = 'https://jsonplaceholder.typicode.com/photos?_page='+
+      getState().currentPage +'&_limit=' + getState().pageLimit + (getState().searchTerm !== '' ? ('&q=' + getState().searchTerm) : '');
   fetch(url)
     .then((response) => {
       let linkHeader = response.headers.get('Link');
@@ -68,14 +78,7 @@ export const reducer = (state = initialState, action) => {
       state = { ...state, currentPage: action.payload};
       break;
     case ADD_ITEM:
-      let addedItem = state.basket.find(item => item.id === action.payload.id);
-      if (addedItem) {
-        addedItem.quantity += 1;
-        return { ...state, totalItems: state.totalItems + 1 };
-      } else {
-        action.payload.quantity = 1;
-        return { ...state, totalItems: state.totalItems + 1, basket: [...state.basket, action.payload]}
-      }
+      addItem(state, action);
       break;
     case OPEN_BASKET:
       state = { ...state, openBasket: action.payload};
@@ -84,17 +87,35 @@ export const reducer = (state = initialState, action) => {
       state = { ...state, totalItems: action.payload};
       break;
     case REMOVE_ITEM:
-      let itemToRemove = state.basket.find(item => item.id === action.payload.id);
-      if (itemToRemove) {
-        if (itemToRemove.quantity > 1) {
-          itemToRemove.quantity -= 1;
-          return { ...state, totalItems: state.totalItems - 1};
-        } else {
-          return { ...state, totalItems: state.totalItems - 1, basket: state.basket.filter(item => item.id !== action.payload.id)};
-        }
-      }
+      removeItem(state, action);
+      break;
+    case SEARCH:
+      state = { ...state, searchTerm: action.payload};
       break;
   }
 
   return state;
+};
+
+const addItem = (state, action) => {
+  let addedItem = state.basket.find(item => item.id === action.payload.id);
+  if (addedItem) {
+    addedItem.quantity += 1;
+    return { ...state, totalItems: state.totalItems + 1 };
+  } else {
+    action.payload.quantity = 1;
+    return { ...state, totalItems: state.totalItems + 1, basket: [...state.basket, action.payload]}
+  }
+};
+
+const removeItem = (state, action) => {
+  let itemToRemove = state.basket.find(item => item.id === action.payload.id);
+  if (itemToRemove) {
+    if (itemToRemove.quantity > 1) {
+      itemToRemove.quantity -= 1;
+      return { ...state, totalItems: state.totalItems - 1};
+    } else {
+      return { ...state, totalItems: state.totalItems - 1, basket: state.basket.filter(item => item.id !== action.payload.id)};
+    }
+  }
 };

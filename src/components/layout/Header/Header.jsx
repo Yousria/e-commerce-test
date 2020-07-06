@@ -3,6 +3,7 @@ import {ShoppingBasketOutlined, RemoveCircle} from '@material-ui/icons';
 import {IconButton, Badge, Drawer, Card, CardContent, CardMedia, Typography} from '@material-ui/core';
 import {useSelector, useDispatch} from 'react-redux';
 import styles from './Header.scss';
+import SearchBar from '../../SearchBar';
 
 export const Header = () => {
     let dispatch = useDispatch();
@@ -15,6 +16,7 @@ export const Header = () => {
 
     return (
         <div className={styles.header}>
+            <SearchBar/>
             <Badge badgeContent={totalItems} color='secondary'>
                 <IconButton onClick={() => dispatch({type: 'OPEN_BASKET', payload: true})} disabled={totalItems === 0}>
                     <ShoppingBasketOutlined/>

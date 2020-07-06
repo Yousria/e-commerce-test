@@ -3,5 +3,5 @@ node_modules
 target
 /dist*
 webpack.config.js
-*.spec.jsx
+*.test.jsx
 
