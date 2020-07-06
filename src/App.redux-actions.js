@@ -6,9 +6,10 @@ const SET_PAGE_LIMIT = 'SET_PAGE_LIMIT';
 const SET_LAST_PAGE = 'SET_LAST_PAGE';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const PREVIOUS_PAGE = 'PREVIOUS_PAGE';
+const ADD_ITEM = 'ADD_ITEM';
 
 const initialState = {
-  photos: {}, basket: {}, status: '', pageLimit: 15, currentPage: 1, lastPage: 0
+  photos: [], basket: [], status: '', pageLimit: 15, currentPage: 1, lastPage: 0
 };
 
 export const getDataAction = () => function (dispatch, getState) {
@@ -22,7 +23,7 @@ export const getDataAction = () => function (dispatch, getState) {
       let linkHeader = response.headers.get('Link');
       let lastPage = linkHeader.substring(linkHeader.lastIndexOf('page=') + 5, linkHeader.lastIndexOf('&'));
       dispatch({
-        type: 'SET_LAST_PAGE',
+        type: SET_LAST_PAGE,
         payload: Number(lastPage)
       });
       return response.json();
@@ -62,6 +63,9 @@ export const reducer = (state = initialState, action) => {
       break;
     case SET_CURRENT_PAGE:
       state = { ...state, currentPage: action.payload};
+      break;
+    case ADD_ITEM:
+      state = { ...state, basket: [...state.basket, action.payload]};
       break;
   }
 
